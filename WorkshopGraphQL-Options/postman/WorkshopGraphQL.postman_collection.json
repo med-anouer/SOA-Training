@@ -1,0 +1,309 @@
+{
+  "info": {
+    "name": "SOA - WorkshopGraphQL (Options & Etudiants)",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    {
+      "key": "graphqlUrl",
+      "value": "http://localhost:8080/WorkshopGraphQL_war_exploded/graphql"
+    }
+  ],
+  "item": [
+    {
+      "name": "A - Options",
+      "item": [
+        {
+          "name": "1. getAllOptions",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "url": {
+              "raw": "{{graphqlUrl}}",
+              "host": [
+                "{{graphqlUrl}}"
+              ]
+            },
+            "body": {
+              "mode": "graphql",
+              "graphql": {
+                "query": "query {\n  getAllOptions {\n    codeOption libelle domaine responsable credits semestre capacite\n  }\n}",
+                "variables": ""
+              }
+            }
+          }
+        },
+        {
+          "name": "2. addOption (Boolean)",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "url": {
+              "raw": "{{graphqlUrl}}",
+              "host": [
+                "{{graphqlUrl}}"
+              ]
+            },
+            "body": {
+              "mode": "graphql",
+              "graphql": {
+                "query": "mutation AddOption {\n  addOption(\n    codeOption: 6\n    libelle: \"Informatique\"\n    domaine: \"Informatique\"\n    responsable: \"M. Responsable Informatique\"\n    credits: 30\n    semestre: 2\n    capacite: 50\n  )\n}",
+                "variables": ""
+              }
+            }
+          }
+        },
+        {
+          "name": "3. updateOption (Boolean)",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "url": {
+              "raw": "{{graphqlUrl}}",
+              "host": [
+                "{{graphqlUrl}}"
+              ]
+            },
+            "body": {
+              "mode": "graphql",
+              "graphql": {
+                "query": "mutation UpdateOption {\n  updateOption(\n    codeOption: 6\n    libelle: \"Info6\"\n    domaine: \"Informatique\"\n    responsable: \"M. Responsable Informatique\"\n    credits: 20\n    semestre: 2\n    capacite: 50\n  )\n}",
+                "variables": ""
+              }
+            }
+          }
+        },
+        {
+          "name": "4. getOptionsByDomaine",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "url": {
+              "raw": "{{graphqlUrl}}",
+              "host": [
+                "{{graphqlUrl}}"
+              ]
+            },
+            "body": {
+              "mode": "graphql",
+              "graphql": {
+                "query": "query GetOptionsByDomaine {\n  getOptionsByDomaine(domaine: \"Informatique\") {\n    codeOption\n    libelle\n    domaine\n    responsable\n  }\n}",
+                "variables": ""
+              }
+            }
+          }
+        },
+        {
+          "name": "5. getOptionByCode",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "url": {
+              "raw": "{{graphqlUrl}}",
+              "host": [
+                "{{graphqlUrl}}"
+              ]
+            },
+            "body": {
+              "mode": "graphql",
+              "graphql": {
+                "query": "query {\n  getOptionByCode(codeOption: 1) {\n    codeOption libelle domaine responsable credits semestre capacite\n  }\n}",
+                "variables": ""
+              }
+            }
+          }
+        },
+        {
+          "name": "6. deleteOption",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "url": {
+              "raw": "{{graphqlUrl}}",
+              "host": [
+                "{{graphqlUrl}}"
+              ]
+            },
+            "body": {
+              "mode": "graphql",
+              "graphql": {
+                "query": "mutation {\n  deleteOption(codeOption: 6)\n}",
+                "variables": ""
+              }
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "B - Etudiants",
+      "item": [
+        {
+          "name": "0. getAllEtudiants",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "url": {
+              "raw": "{{graphqlUrl}}",
+              "host": [
+                "{{graphqlUrl}}"
+              ]
+            },
+            "body": {
+              "mode": "graphql",
+              "graphql": {
+                "query": "query {\n  getAllEtudiants {\n    identifiant\n    nom\n    prenom\n    anneeEtude\n    email\n    option { codeOption libelle }\n  }\n}",
+                "variables": ""
+              }
+            }
+          }
+        },
+        {
+          "name": "1. addEtudiant",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "url": {
+              "raw": "{{graphqlUrl}}",
+              "host": [
+                "{{graphqlUrl}}"
+              ]
+            },
+            "body": {
+              "mode": "graphql",
+              "graphql": {
+                "query": "mutation {\n  addEtudiant(\n    identifiant: \"I010\"\n    nom: \"Etudiant 1\"\n    prenom: \"Etudiant 1\"\n    anneeEtude: 2023\n    email: \"etudiant1@example.com\"\n    codeOption: 1\n  )\n}",
+                "variables": ""
+              }
+            }
+          }
+        },
+        {
+          "name": "2. getEtudiantById",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "url": {
+              "raw": "{{graphqlUrl}}",
+              "host": [
+                "{{graphqlUrl}}"
+              ]
+            },
+            "body": {
+              "mode": "graphql",
+              "graphql": {
+                "query": "query {\n  getEtudiantById(identifiant: \"I010\") {\n    identifiant\n    nom\n    prenom\n    anneeEtude\n    email\n    option { codeOption libelle }\n  }\n}",
+                "variables": ""
+              }
+            }
+          }
+        },
+        {
+          "name": "3. getEtudiantsByOption",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "url": {
+              "raw": "{{graphqlUrl}}",
+              "host": [
+                "{{graphqlUrl}}"
+              ]
+            },
+            "body": {
+              "mode": "graphql",
+              "graphql": {
+                "query": "query {\n  getEtudiantsByOption(codeOption: 1) {\n    identifiant\n    nom\n    prenom\n  }\n}",
+                "variables": ""
+              }
+            }
+          }
+        },
+        {
+          "name": "4. updateEtudiant",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "url": {
+              "raw": "{{graphqlUrl}}",
+              "host": [
+                "{{graphqlUrl}}"
+              ]
+            },
+            "body": {
+              "mode": "graphql",
+              "graphql": {
+                "query": "mutation {\n  updateEtudiant(\n    identifiant: \"I010\"\n    nom: \"Nouveau\"\n    prenom: \"Nom\"\n    anneeEtude: 2024\n    email: \"nouveau@example.com\"\n    codeOption: 2\n  )\n}",
+                "variables": ""
+              }
+            }
+          }
+        },
+        {
+          "name": "5. deleteEtudiant",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "url": {
+              "raw": "{{graphqlUrl}}",
+              "host": [
+                "{{graphqlUrl}}"
+              ]
+            },
+            "body": {
+              "mode": "graphql",
+              "graphql": {
+                "query": "mutation {\n  deleteEtudiant(identifiant: \"I010\")\n}",
+                "variables": ""
+              }
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Travail demandé n°3 - plusieurs queries dans une seule requête",
+      "item": [
+        {
+          "name": "Multi-query (1 requête HTTP, 3 résultats)",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "url": {
+              "raw": "{{graphqlUrl}}",
+              "host": [
+                "{{graphqlUrl}}"
+              ]
+            },
+            "body": {
+              "mode": "graphql",
+              "graphql": {
+                "query": "query {\n  getAllOptions { codeOption libelle }\n  getEtudiantById(identifiant: \"I001\") { nom prenom }\n  getOptionsByDomaine(domaine: \"Chimie\") { libelle responsable }\n}",
+                "variables": ""
+              }
+            }
+          }
+        },
+        {
+          "name": "Multi-query avec alias (même champ appelé 2 fois)",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "url": {
+              "raw": "{{graphqlUrl}}",
+              "host": [
+                "{{graphqlUrl}}"
+              ]
+            },
+            "body": {
+              "mode": "graphql",
+              "graphql": {
+                "query": "query {\n  info: getOptionsByDomaine(domaine: \"Informatique\") { libelle }\n  maths: getOptionsByDomaine(domaine: \"Mathématiques\") { libelle }\n}",
+                "variables": ""
+              }
+            }
+          }
+        }
+      ]
+    }
+  ]
+}

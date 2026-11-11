@@ -1,0 +1,25 @@
+# ===== Maven / Java =====
+target/
+*.class
+*.war
+*.jar
+!**/src/**/*.jar
+
+# ===== IntelliJ / Eclipse / VS Code =====
+.idea/
+*.iml
+*.iws
+*.ipr
+.classpath
+.project
+.settings/
+.vscode/
+
+# ===== Serveurs d'applications : ne jamais versionner Tomcat =====
+apache-tomcat*/
+*.rar
+
+# ===== OS =====
+.DS_Store
+Thumbs.db
+out/

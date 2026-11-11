@@ -1,0 +1,94 @@
+# ===================== Types =====================
+type Option {
+    codeOption: Int!
+    libelle: String!
+    domaine: String!
+    responsable: String!
+    credits: Int!
+    semestre: Int!
+    capacite: Int!
+}
+
+type Etudiant {
+    identifiant: String!
+    nom: String!
+    prenom: String!
+    anneeEtude: Int!
+    email: String
+    option: Option
+}
+
+# ===================== Queries (lecture) =====================
+type Query {
+    # A.1 Liste de toutes les options
+    getAllOptions: [Option!]!
+    # A.4 Options d'un domaine
+    getOptionsByDomaine(domaine: String!): [Option!]!
+    # A.5 Une option à partir de son code (null si elle n'existe pas)
+    getOptionByCode(codeOption: Int!): Option
+
+    # Liste de tous les étudiants
+    getAllEtudiants: [Etudiant!]!
+    # B.2 Un étudiant à partir de son identifiant (null s'il n'existe pas)
+    getEtudiantById(identifiant: String!): Etudiant
+    # B.3 Tous les étudiants d'un code option
+    getEtudiantsByOption(codeOption: Int!): [Etudiant!]!
+}
+
+# ===================== Mutations (écriture) =====================
+# Toutes retournent un Boolean : true = opération réussie, false = échec
+# (code déjà utilisé, élément introuvable, option inconnue...)
+type Mutation {
+    # A.2 Création d'une option
+    addOption(
+        codeOption: Int!
+        libelle: String!
+        domaine: String!
+        responsable: String!
+        credits: Int!
+        semestre: Int!
+        capacite: Int!
+    ): Boolean!
+
+    # A.3 Modification de l'option ayant ce code
+    updateOption(
+        codeOption: Int!
+        libelle: String!
+        domaine: String!
+        responsable: String!
+        credits: Int!
+        semestre: Int!
+        capacite: Int!
+    ): Boolean!
+
+    # A.6 Suppression de l'option ayant ce code
+    deleteOption(codeOption: Int!): Boolean!
+
+    # B.1 Création d'un étudiant (rattaché à une option existante)
+    addEtudiant(
+        identifiant: String!
+        nom: String!
+        prenom: String!
+        anneeEtude: Int!
+        email: String
+        codeOption: Int!
+    ): Boolean!
+
+    # B.4 Mise à jour de l'étudiant ayant cet identifiant
+    updateEtudiant(
+        identifiant: String!
+        nom: String!
+        prenom: String!
+        anneeEtude: Int!
+        email: String
+        codeOption: Int!
+    ): Boolean!
+
+    # B.5 Suppression de l'étudiant ayant cet identifiant
+    deleteEtudiant(identifiant: String!): Boolean!
+}
+
+schema {
+    query: Query
+    mutation: Mutation
+}
